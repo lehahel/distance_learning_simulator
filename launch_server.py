@@ -1,4 +1,5 @@
 import flask
+import json
 from server import lib
 import tkinter
 from server import checker
@@ -7,24 +8,22 @@ app = flask.Flask("Distance Learning Server")
 
 student = lib.Student('Unknown', 0)
 
+default_ip = "localhost:8000"
 registered = False
 
 
 @app.route('/start', methods=['POST'])
 def start():
     global student
-    print(flask.request.args)
     name = flask.request.args['name']
     weight = flask.request.args['weight']
     student = lib.Student(name, int(weight))
-    print(student.name, student.fat)
     return "Done"
 
 
 @app.route('/get_params', methods=['GET'])
 def get_params():
-    return student.name + '\n' + str(student.energy) + '\n' + str(student.fat) \
-           + '\n' + student.get_mood() + '\n' + str(student.xp)
+    return json.dumps(list(map(str, [student.energy, student.fat, student.get_mood(), student.xp])))
 
 
 @app.route('/eat', methods=['POST'])
@@ -52,7 +51,6 @@ def play():
 def study():
     global student
     text = student.study()
-    print(student.energy, 'ENERGY')
     return text
 
 
@@ -70,6 +68,7 @@ class ServerWindow:
             .grid(row=1, column=0, columnspan=3)
 
         tkinter.Label(self.root, textvariable=self.error_text, foreground="red").grid(row=2, column=0, columnspan=3)
+        self.entry.insert(tkinter.END, default_ip)
         self.entry.grid(row=0, column=1, columnspan=2)
 
     def start(self):
