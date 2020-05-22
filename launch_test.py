@@ -15,9 +15,8 @@ class TestStudent(unittest.TestCase):
         self.assertEqual(student.energy, 1)
         self.assertEqual(student.get_mood(), 'good')
 
-        student.eat(food)
-        student.eat(food)
-        student.eat(food)
+        for _ in range(3):
+            student.eat(food)
         self.assertEqual(student.fat, 62)
         self.assertEqual(student.energy, 4)
         self.assertEqual(student.get_mood(), 'very good')
@@ -33,9 +32,8 @@ class TestStudent(unittest.TestCase):
         self.assertEqual(launch_server.student.energy, 1)
         self.assertEqual(launch_server.student.get_mood(), 'good')
 
-        launch_server.eat()
-        launch_server.eat()
-        launch_server.eat()
+        for _ in range(3):
+            launch_server.eat()
         self.assertEqual(launch_server.student.fat, 12)
         self.assertEqual(launch_server.student.energy, 4)
         self.assertEqual(launch_server.student.get_mood(), 'very good')

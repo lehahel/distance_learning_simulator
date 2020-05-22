@@ -1,38 +1,14 @@
 import tkinter
 import threading
-from client import studlib
+from const import const
 import requests
 import ImageTk
 import Image
 import json
-from time import sleep
 
 registered = False
-default_ip = "localhost:8000"
-
-handlers = {
-    'size': 3,
-    'text': [
-        "Enter your name",
-        "Enter your weight",
-        "Enter your ip (with port)"
-    ],
-    'checker': [
-        studlib.check_name,
-        studlib.check_weight,
-        studlib.check_ip
-    ],
-    'error_text': [
-        "Error!\nName can only contain symbols\nfrom latin alphabet!",
-        "Error!\nWeight should be a number",
-        "Error!\nip should have format *.*.*.*:*"
-    ],
-    'info_type': [
-        'name',
-        'weight',
-        'ip'
-    ]
-}
+handlers = const.handlers
+default_ip = const.default_ip
 
 
 class RegWindow:
