@@ -14,5 +14,5 @@ Pillow==7.1.2
 Pillow-PIL==0.1.dev0
 pycparser==2.20
 requests==2.23.0
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
